@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FcPrevious } from "react-icons/fc";
+import { Link, useParams } from 'react-router-dom';
 
 export default function ProductsDetails() {
     const { id } = useParams();
@@ -14,6 +15,7 @@ export default function ProductsDetails() {
     }, [id])
     return (
         <div>
+            <Link to="/shop"><button class="btn flex"><FcPrevious />Back to Shop</button></Link>
             <div class="hero min-h-screen bg-base-200">
                 <div class="hero-content flex-col lg:flex-row">
                     <img src={product.image} alt={product.displayName} className="rounded-xl" />
@@ -41,6 +43,7 @@ export default function ProductsDetails() {
                         <button class="btn btn-success mt-2 ">${product.price} only</button>
                         <br />
                         <p class="font-bold mt-2 m-1"> Time:{product.time}</p>
+                        <button class="btn btn-warning mt-2 ">Order Now!!!</button>
                     </div>
                 </div>
             </div>
