@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from 'react-router-dom';
 import { HashLoader } from "react-spinners";
+import Login from "./Components/Authentication/Login";
 import Home from './Components/Home/Home';
 import AllProducts from "./Components/Products/AllProducts";
 import ProductsDetails from "./Components/Products/ProductsDetails";
@@ -43,6 +44,7 @@ export default function App() {
                             <Route path="/upload" element={<Upload />} />
                             <Route path="/products/:id" element={<ProductsDetails />} />
                             <Route path="/shop" element={<AllProducts />} />
+                            <Route path="/login" element={<Login />} />
                         </Routes>
                         <Footer />
                         <Toaster />
