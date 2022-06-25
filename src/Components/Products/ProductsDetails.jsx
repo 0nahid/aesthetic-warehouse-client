@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FcPrevious } from "react-icons/fc";
 import { Link, useParams } from 'react-router-dom';
+import Loading from '../Shared/Loader/Loader';
 
 export default function ProductsDetails() {
+    const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const [product, setProduct] = useState({});
     useEffect(() => {
@@ -13,6 +15,15 @@ export default function ProductsDetails() {
             }
             )
     }, [id])
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, [])
+    if (loading) {
+        return <Loading />
+    }
     return (
         <div>
             <Link to="/shop"><button class="btn flex"><FcPrevious />Back to Shop</button></Link>
