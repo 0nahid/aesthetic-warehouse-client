@@ -25,7 +25,7 @@ export default function Header() {
             </li>
 
             <li>
-                <Link className="uppercase bg-neutral text-white" to="/dashboard">
+                <Link className="uppercase bg-neutral font-semibold text-white" to="/dashboard">
                     Dashboard
                 </Link>
             </li>
@@ -45,7 +45,7 @@ export default function Header() {
                             {NavbarMenus}
                         </ul>
                     </div>
-                    <a class="btn btn-ghost normal-case text-xl">Aesthetic Outfits</a>
+                    <Link to="/" class="btn btn-ghost normal-case text-xl">Aesthetic Outfit</Link>
                 </div>
                 <div class="navbar-center hidden lg:flex">
                     <ul class="menu menu-horizontal p-0">
