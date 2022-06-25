@@ -17,7 +17,7 @@ export default function HomeProducts() {
         <div>
             <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointColumnsObj}>
                 {products.map(product => (
-                   <Link to="/" >
+                   <Link to={`/products/${product._id}`} >
                      <div key={product.id} className="m-5 drop-shadow-2xl bg-gray-50 rounded-xl p-3">
                         <img className="rounded-xl" src={product.image} alt={product.dressTitle} />
                         <h3 className="mt-1 mb-1 font-bold">{product.dressTitle}</h3>
