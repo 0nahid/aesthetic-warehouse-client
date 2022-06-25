@@ -1,8 +1,16 @@
+import { Route, Routes } from 'react-router-dom';
+import Home from './Components/Home/Home';
+import Footer from './Components/Shared/Footer/Footer';
+import Header from './Components/Shared/Header/Header';
 import './index.css';
 export default function App() {
     return (
-        <h1 className="text-3xl font-bold text-primary">
-            Hello world!
-        </h1>
+        <div>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+            </Routes>
+            <Footer />
+        </div>
     )
 }
