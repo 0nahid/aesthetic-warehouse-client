@@ -7,6 +7,7 @@ import Login from "./Components/Authentication/Login";
 import Profile from "./Components/Authentication/Profile";
 import Register from "./Components/Authentication/Register";
 import RequireAuth from "./Components/Authentication/RequireAuth";
+import Dashboard from "./Components/Dashboard/Dashboard/Dashboard";
 import Manage from "./Components/Dashboard/Manage/Manage";
 import Upload from './Components/Dashboard/Upload/Upload';
 import Home from './Components/Home/Home';
@@ -52,6 +53,7 @@ export default function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/manage" element={<RequireAuth><Manage /></RequireAuth>} />
                             <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+                            <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
                         </Routes>
                         <Footer />
                         <Toaster />
