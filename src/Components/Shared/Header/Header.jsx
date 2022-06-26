@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
-
+import headerLogo from "./header.png";
 export default function Header() {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
@@ -54,7 +54,8 @@ export default function Header() {
                             {NavbarMenus}
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">Aesthetic Outfit</Link>
+                    <Link to="/">
+                        <img src={headerLogo} style={{maxWidth: '75%'}}  alt="Header Logo" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
