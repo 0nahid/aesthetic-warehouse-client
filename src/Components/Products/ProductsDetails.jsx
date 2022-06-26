@@ -26,9 +26,9 @@ export default function ProductsDetails() {
     }
     return (
         <div>
-            <Link to="/shop"><button class="btn flex"><FcPrevious />Back to Shop</button></Link>
-            <div class="hero min-h-screen bg-base-200">
-                <div class="hero-content flex-col lg:flex-row">
+            <Link key={product._id} to="/shop"><button class="btn flex"><FcPrevious />Back to Shop</button></Link>
+            <div  class="hero min-h-screen bg-base-200">
+                <div  class="hero-content flex-col lg:flex-row">
                     <img src={product.image} alt={product.displayName} className="rounded-xl" />
                     <div>
                         <h1 class="text-5xl font-bold mb-5">{product.dressTitle}!</h1>
@@ -53,7 +53,7 @@ export default function ProductsDetails() {
                         <br />
                         <button class="btn btn-success mt-2 ">${product.price} only</button>
                         <br />
-                        <p class="font-bold mt-2 m-1"> Time:{product.time}</p>
+                        <p class="font-bold mt-2 m-1"> Time: {product.time !== "" ? product.time : "Not Available"}</p>
                         <button class="btn btn-warning mt-2 ">Order Now!!!</button>
                     </div>
                 </div>

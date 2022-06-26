@@ -1,8 +1,50 @@
+import { useEffect } from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
+import Loading from '../Shared/Loader/Loader';
 export default function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm();
+    const [signInWithEmailAndPassword, user, loading, error] =
+        useSignInWithEmailAndPassword(auth);
+    let signInError;
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+            toast.success(`Welcome Back, ${auth?.currentUser?.displayName}`, {
+                autoClose: 4000,
+            });
+        }
+    }, [user, navigate, from]);
+
+    if (loading || gLoading) {
+        return <Loading></Loading>;
+    }
+    if (error || gError) {
+        signInError = (
+            <p className="text-red-500">
+                <small>{error?.message || gError?.message}</small>
+            </p>
+        );
+    }
+    const onSubmit = (data) => {
+        signInWithEmailAndPassword(data.email, data.password);
+    };
+    if (user || gUser) {
+        navigate(from, { replace: true });
+    }
+
 
     return (
         <div class="hero min-h-screen bg-base-200">
@@ -30,8 +72,11 @@ export default function Login() {
                             )}
                             <label class="label">
                                 <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                                <Link to="/register" class="label-text-alt link link-hover">New user?</Link>
+
                             </label>
                         </div>
+                        {signInError}
                         <div class="form-control mt-6">
                             <button onSubmit={onSubmit} class="btn btn-primary">Login</button>
                         </div>
@@ -40,7 +85,7 @@ export default function Login() {
                     <p class="text-center">Or</p>
                     <hr />
                     <button
-                        // onClick={() => signInWithGoogle()}
+                        onClick={() => signInWithGoogle()}
                         className="btn btn-outline border-primary flex items-center content-center rounded-full hover:btn-primary"
                     >
                         <FcGoogle className="text-2xl mr-2"></FcGoogle>Continue with Google
