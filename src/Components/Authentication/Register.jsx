@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useState } from 'react';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile ,useSendEmailVerification} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
@@ -20,6 +21,10 @@ export default function Register() {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [email, setEmail] = useState('');
+    const [sendEmailVerification, sending, error2] = useSendEmailVerification(
+        auth
+      );
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
@@ -31,16 +36,17 @@ export default function Register() {
             .then(res => {
                 if (res.status === 200) {
                     navigate(from, { replace: true });
-                    toast.success(`Welcome ${data.name}! You are now registered.`);
+                    sendEmailVerification();
+                    toast.success(`Welcome ${data.name}! You are now registered. ${email} check your email/spambox to verify your account.`);
                 }
             })
     };
     let signInError;
-    if (error || error1) {
+    if (error || error1 || error2) {
         signInError = (
             <p className="text-red-500">
                 <small>
-                    {error?.message || error1?.message}
+                    {error?.message || error1?.message || error2?.message}
                 </small>
             </p>
         );
@@ -49,7 +55,7 @@ export default function Register() {
     if (user || user1) {
         navigate("/", { replace: true });
     }
-    if (loading) {
+    if (loading || sending || loading1) {
         return <Loading></Loading>;
     }
 

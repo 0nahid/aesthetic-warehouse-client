@@ -80,7 +80,7 @@ export default function Header() {
                                 <li><Link to="/upload">Add Product</Link></li>
                                 <li><button onClick={handleLogOut} >Logout</button></li>
                             </ul>
-                        </div>) : <ul> <li><Link to="/login">Login</Link></li></ul>
+                        </div>) : <ul> <li><Link to="/login"><button class="btn ">Login</button></Link></li></ul>
                     }
                 </div>
             </div>
