@@ -33,14 +33,14 @@ export default function Footer() {
         </div>
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
-            <BsFacebook class="w-8 h-8" />
-            <BsTwitter class="w-8 h-8" />
-            <BsInstagram class="w-8 h-8" />
+            <BsFacebook className="w-8 h-8" />
+            <BsTwitter className="w-8 h-8" />
+            <BsInstagram className="w-8 h-8" />
           </div>
         </div>
 
       </footer>
-      <div class="text-center bg-base-200 p-5">
+      <div className="text-center bg-base-200 p-5">
         <p>Designed By <span><a href="https://github.com/0nahid">Nahid</a></span> </p>
       </div>
     </div>

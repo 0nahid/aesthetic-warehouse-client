@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { useState } from 'react';
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
-export default function UpdateProducts({ dress, setModalProduct ,refetch}) {
+export default function UpdateProducts({ dress, setModalProduct, refetch }) {
   const { _id, image, quantity, dressTitle, price } = dress;
   // console.log(dress);
 
@@ -42,7 +41,7 @@ export default function UpdateProducts({ dress, setModalProduct ,refetch}) {
       <td>{quantity}</td>
       <td className="font-semibold">{price}$</td>
       <td>
-        <label for="my-modal-3" onClick={() => setModalProduct({ _id, dressTitle, quantity,price })} class="btn modal-button mr-5">Edit</label>
+        <label for="my-modal-3" onClick={() => setModalProduct({ _id, dressTitle, quantity, price })} className="btn modal-button mr-5">Edit</label>
       </td>
       <td> <button
         onClick={() => handleDeleteItem(_id)}

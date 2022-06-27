@@ -26,34 +26,34 @@ export default function ProductsDetails() {
     }
     return (
         <div>
-            <Link key={product._id} to="/shop"><button class="btn flex"><FcPrevious />Back to Shop</button></Link>
-            <div class="hero min-h-screen bg-base-200">
-                <div class="hero-content flex-col lg:flex-row">
+            <Link key={product._id} to="/shop"><button className="btn flex"><FcPrevious />Back to Shop</button></Link>
+            <div className="hero min-h-screen bg-base-200">
+                <div className="hero-content flex-col lg:flex-row">
                     <img src={product.image} alt={product.displayName} className="rounded-xl w-1/2" />
                     <div className="m-5">
-                        <h1 class="text-5xl font-bold mb-5">{product.dressTitle}!</h1>
-                        <p class="py-6font-semibold text-xl mb-5">
+                        <h1 className="text-5xl font-bold mb-5">{product.dressTitle}!</h1>
+                        <p className="py-6font-semibold text-xl mb-5">
                             {product.description}
                         </p>
 
-                        <div class="badge badge-outline gap-2 py-6 mr-2">
+                        <div className="badge badge-outline gap-2 py-6 mr-2">
                             Brand:
                             <div>{product.brand}</div>
                         </div>
 
-                        <div class="badge badge-outline gap-2 py-6 mt-2">
+                        <div className="badge badge-outline gap-2 py-6 mt-2">
                             Category:
                             <div>{product.category}</div>
                         </div>
                         <br />
-                        <div class="badge badge-outline gap-2 py-6 mt-2 mr-2">
+                        <div className="badge badge-outline gap-2 py-6 mt-2 mr-2">
                             Quantity:
-                            <div class="badge"> {product.quantity} pcs</div>
+                            <div className="badge"> {product.quantity} pcs</div>
                         </div>
-                        <div class="badge badge-lg gap-2 py-6 mt-2 text-white">Price: <span className="font-bold">${product.price}</span> only</div>
+                        <div className="badge badge-lg gap-2 py-6 mt-2 text-white">Price: <span className="font-bold">${product.price}</span> only</div>
                         <br />
-                        <p class="font-bold mt-2 m-1"> Time: {product.time !== "" ? product.time?.slice(0, 10) : "Not Available"}</p>
-                        <button class="btn btn-warning mt-2 ">Order Now!!!</button>
+                        <p className="font-bold mt-2 m-1"> Time: {product.time !== "" ? product.time?.slice(0, 10) : "Not Available"}</p>
+                        <button className="btn btn-warning mt-2 "><Link to={`/checkout/${product._id}`}>Order Now!!!</Link></button>
                     </div>
                 </div>
             </div>

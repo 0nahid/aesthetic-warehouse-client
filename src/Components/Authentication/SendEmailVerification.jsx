@@ -25,13 +25,13 @@ export default function SendEmailVerification() {
         return <Loading />
     }
     return (
-        <div class="hero min-h-screen bg-base-200">
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Verify your email</h2>
+        <div className="hero min-h-screen bg-base-200">
+            <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Verify your email</h2>
                     <p>If you don't verify email you can't access most of the content of this site</p>
-                    <div class="card-actions justify-end">
-                        <button onClick={sendVerification} class="btn">Send Verification</button>
+                    <div className="card-actions justify-end">
+                        <button onClick={sendVerification} className="btn">Send Verification</button>
                     </div>
                 </div>
             </div>

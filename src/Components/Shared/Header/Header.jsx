@@ -65,7 +65,7 @@ export default function Header() {
                         <img src={headerLogo} style={{ maxWidth: '75%' }} alt="Header Logo" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal p-0 mx-2">
+                    <ul className="menu menu-horizontal p-0">
                         {NavbarMenus}
                     </ul>
                 </div>
@@ -87,7 +87,7 @@ export default function Header() {
                                 <li><Link to="/dashboard">Dashboard</Link></li>
                                 <li><button onClick={handleLogOut} >Logout</button></li>
                             </ul>
-                        </div>) : <ul> <li><Link to="/login"><button class="btn ">Login</button></Link></li></ul>
+                        </div>) : <ul> <li><Link to="/login"><button className="btn ">Login</button></Link></li></ul>
                     }
                 </div>
             </div>

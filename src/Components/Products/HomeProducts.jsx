@@ -27,7 +27,7 @@ export default function HomeProducts() {
                 ))}
             </Masonry>
             <div className="text-center">
-                <button class="btn btn-info">
+                <button className="btn btn-info">
                     <Link to="/shop">Show All</Link>
                 </button>
             </div>

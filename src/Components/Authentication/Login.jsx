@@ -47,42 +47,42 @@ export default function Login() {
 
 
     return (
-        <div class="hero min-h-screen bg-base-200">
-            <div class="card w-96 bg-base-100 shadow-xl">
+        <div className="hero min-h-screen bg-base-200">
+            <div className="card w-96 bg-base-100 shadow-xl">
                 <figure><img src="https://api.lorem.space/image/fashion?w=400&h=225" alt="Shoes" /></figure>
-                <h1 class="text-center font-semibold mt-3 uppercase">Welcome back...</h1>
-                <div class="card-body">
+                <h1 className="text-center font-semibold mt-3 uppercase">Welcome back...</h1>
+                <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
                             </label>
                             <input type="email" className="input input-bordered w-full" placeholder="email" {...register("email", { required: true, min: 5 })} />
                             {errors.email?.type === "required" && (
                                 <span className="text-error">Email is required</span>
                             )}
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
                             </label>
                             <input type="password" className="input input-bordered w-full" placeholder="password" {...register("password", { required: true, min: 6 })} />
                             {errors.password?.type === "required" && (
                                 <span className="text-error">Password is required</span>
                             )}
-                            <label class="label">
-                                <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-                                <Link to="/register" class="label-text-alt link link-hover">New user?</Link>
+                            <label className="label">
+                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <Link to="/register" className="label-text-alt link link-hover">New user?</Link>
 
                             </label>
                         </div>
                         {signInError}
-                        <div class="form-control mt-6">
-                            <button onSubmit={onSubmit} class="btn btn-primary">Login</button>
+                        <div className="form-control mt-6">
+                            <button onSubmit={onSubmit} className="btn btn-primary">Login</button>
                         </div>
                     </form>
                     <hr />
-                    <p class="text-center">Or</p>
+                    <p className="text-center">Or</p>
                     <hr />
                     <button
                         onClick={() => signInWithGoogle()}
