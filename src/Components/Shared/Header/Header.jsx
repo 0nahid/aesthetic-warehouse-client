@@ -34,8 +34,8 @@ export default function Header() {
                 </NavLink>
             </li>
             <li>
-                <NavLink className="uppercase" to="/contact">
-                    Contact
+                <NavLink className="uppercase" to="/about">
+                    About
                 </NavLink>
             </li>
 
@@ -55,7 +55,7 @@ export default function Header() {
                         </ul>
                     </div>
                     <Link to="/">
-                        <img src={headerLogo} style={{maxWidth: '75%'}}  alt="Header Logo" /></Link>
+                        <img src={headerLogo} style={{ maxWidth: '75%' }} alt="Header Logo" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">

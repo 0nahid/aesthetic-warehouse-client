@@ -11,6 +11,7 @@ import Dashboard from "./Components/Dashboard/Dashboard/Dashboard";
 import Manage from "./Components/Dashboard/Manage/Manage";
 import Upload from './Components/Dashboard/Upload/Upload';
 import Home from './Components/Home/Home';
+import About from "./Components/Pages/About";
 import Blog from "./Components/Pages/Blog";
 import AllProducts from "./Components/Products/AllProducts";
 import ProductsDetails from "./Components/Products/ProductsDetails";
@@ -50,6 +51,7 @@ export default function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/blogs" element={<Blog />} />
+                            <Route path="/about" element={<About />} />
                             <Route path="/upload" element={<RequireAuth><Upload /></RequireAuth>} />
                             <Route path="/shop" element={<RequireAuth><AllProducts /></RequireAuth>} />
                             <Route path="/products/:id" element={<RequireAuth><ProductsDetails /></RequireAuth>} />
