@@ -28,7 +28,7 @@ export default function Register() {
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        axios.post(`http://localhost:5500/api/users`, {
+        axios.post(`https://aesthetic-ware-house.herokuapp.com/api/users`, {
             name: data.name,
             email: data.email,
             role: 'user'

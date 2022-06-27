@@ -12,7 +12,7 @@ export default function Checkout() {
 
     const [product, setProduct] = useState({});
     useEffect(() => {
-        axios(`http://localhost:5500/api/products/${id}`)
+        axios(`https://aesthetic-ware-house.herokuapp.com/api/products/${id}`)
             .then(res => {
                 setProduct(res.data);
                 // console.log(res.data);
@@ -28,7 +28,7 @@ export default function Checkout() {
             toast.error("Stock can't be negative!");
             return;
         }
-        await axios.post(`http://localhost:5500/api/product/order`, {
+        await axios.post(`https://aesthetic-ware-house.herokuapp.com/api/product/order`, {
             userId: user.uid,
             email: user.email,
             productId: id,

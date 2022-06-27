@@ -7,7 +7,7 @@ export default function Manage() {
     const [modalProduct, setModalProduct] = useState({});
 
     const { data, isLoading, refetch } = useQuery(["products"], () =>
-        fetch(`http://localhost:5500/api/products`, {
+        fetch(`https://aesthetic-ware-house.herokuapp.com/api/products`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
@@ -31,7 +31,7 @@ export default function Manage() {
         }
 
         await fetch(
-            `http://localhost:5500/api/products/${modalProduct._id}`,
+            `https://aesthetic-ware-house.herokuapp.com/api/products/${modalProduct._id}`,
             {
                 method: "PATCH",
                 headers: {

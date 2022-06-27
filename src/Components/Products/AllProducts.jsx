@@ -14,7 +14,7 @@ export default function AllProducts() {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5500/api/products', {
+    fetch('https://aesthetic-ware-house.herokuapp.com/api/products', {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

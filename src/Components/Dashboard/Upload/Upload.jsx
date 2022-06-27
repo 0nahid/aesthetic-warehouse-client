@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 export default function Upload() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
-        axios.post(`http://localhost:5500/api/products`, data)
+        axios.post(`https://aesthetic-ware-house.herokuapp.com/api/products`, data)
             .then(res => {
                 if (res.status === 200) {
                     toast.success('Activity added successfully');

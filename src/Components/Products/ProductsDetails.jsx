@@ -9,7 +9,7 @@ export default function ProductsDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     useEffect(() => {
-        axios(`http://localhost:5500/api/products/${id}`)
+        axios(`https://aesthetic-ware-house.herokuapp.com/api/products/${id}`)
             .then(res => {
                 setProduct(res.data);
             }

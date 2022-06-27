@@ -7,7 +7,7 @@ export default function MyOrder() {
     const [orders, setOrders] = useState([])
     const [user] = useAuthState(auth)
     useEffect(() => {
-        axios(`http://localhost:5500/api/orders?email=${user.email}`)
+        axios(`https://aesthetic-ware-house.herokuapp.com/api/orders?email=${user.email}`)
             .then(res => {
                 setOrders(res.data)
             })

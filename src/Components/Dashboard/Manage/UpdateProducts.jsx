@@ -19,7 +19,7 @@ export default function UpdateProducts({ dress, setModalProduct, refetch }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5500/api/products/${id}`)
+        axios.delete(`https://aesthetic-ware-house.herokuapp.com/api/products/${id}`)
           .then((data) => {
             data.status === 200 ? toast.success("Delete Successful") : toast.warning("Activity not deleted");
             refetch();

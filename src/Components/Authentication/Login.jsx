@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -43,7 +42,7 @@ export default function Login() {
         const { email, password } = data;
         await signInWithEmailAndPassword(email, password);
         // console.log(data);
-        // const { data1 } = await axios.post('http://localhost:5500/login', { email });
+        // const { data1 } = await axios.post('https://aesthetic-ware-house.herokuapp.com/login', { email });
         // console.log(data1);
     };
     if (user || gUser) {
