@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Manage from "../Manage/Manage";
 
 export default function Dashboard() {
     return (
