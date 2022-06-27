@@ -1,41 +1,63 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useForm } from 'react-hook-form';
+import { useState } from "react";
 import toast from "react-hot-toast";
-import Swal from "sweetalert2";
+import { useQuery } from "react-query";
+import UpdateProducts from "./UpdateProducts";
 
 export default function Manage() {
-    // const [products] = useProducts();
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        axios(`http://localhost:5500/api/products`)
-            .then(res => setProducts(res.data))
-    }, [])
-    // delete item
-    const handleDeleteItem = (id) => {
-        // add user confirmation for delete
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`http://localhost:5500/api/products/${id}`)
-                    .then((data) => {
-                        data.status === 200 ? toast.success("Delete Successful") : toast.warning("Activity not deleted");
-                        setProducts(products.filter(product => product._id !== id))
-                    });
+    const [modalProduct, setModalProduct] = useState({});
+
+    const { data, isLoading, refetch } = useQuery(["products"], () =>
+        fetch(`http://localhost:5500/api/products`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => res.json())
+    );
+
+    const products = data;
+
+
+    /* Handle Update Stock Product */
+    const [productNameField, setProductNameField] = useState("");
+    const [availableQtyField, setAvailableQtyField] = useState("");
+    const [priceField, setPriceField] = useState("");
+
+    const handleUpdateStock = async (event) => {
+        event.preventDefault();
+
+        if (availableQtyField < 0) {
+            toast.error("Stock can't be negative!");
+            return;
+        }
+
+        await fetch(
+            `http://localhost:5500/api/products/${modalProduct._id}`,
+            {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    dressTitle: productNameField || modalProduct?.dressTitle,
+                    quantity: Number(availableQtyField || modalProduct?.quantity),
+                    price: Number(priceField || modalProduct?.price),
+                }),
             }
-        });
+        )
+            .then((res) => res.json())
+            .then((result) => {
+                // console.log(result);
+                if (result.modifiedCount) {
+                    toast.success(
+                        `${modalProduct?.dressTitle} product updated successfully`
+                    );
+                    refetch();
+                    setModalProduct(null);
+                }
+            });
     };
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
 
     return (
         <div>
@@ -43,70 +65,84 @@ export default function Manage() {
                 <table className="table w-full">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Dress Name</th>
                             <th>Quantity</th>
-                            <th>Action</th>
+                            <th>Price</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            products.map(dress => {
-                                return (
-                                    <tr
-                                        key={dress._id}
-                                    >
-                                        <td>
-                                            <div class="flex items-center">
-                                                <img src={dress.image} alt={dress.name} className="w-16 h-16 mr-2" />
-                                                <h1 className="text-xl font-semibold">{dress.dressTitle}</h1>
-                                            </div>
-                                        </td>
-                                        <td>{dress.quantity}</td>
-                                        <td>
-                                            <label for="my-modal-4" class="btn modal-button mr-5">Edit</label>
-                                            <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-                                            <label for="my-modal-4" class="modal cursor-pointer">
-                                                <label class="modal-box relative" for="">
-                                                    <h1 class="text-center text-xl font-semibold">Update Dress Info & Quantity</h1>
-                                                    <form onSubmit={handleSubmit(onSubmit)}>
-
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                                <span class="label-text">Dress Title</span>
-                                                            </label>
-                                                            <input className="input input-bordered w-full" type="text" placeholder="Dress Title" {...register("dressTitle", { required: true, min: 3 })} />
-                                                            {errors.dressTitle?.type === "required" && (
-                                                                <span className="text-error">Dress Title is required</span>
-                                                            )}
-                                                        </div>
-
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                                <span class="label-text">Dress Title</span>
-                                                            </label>
-                                                            <input className="input input-bordered w-full" type="number" placeholder="Dress Quantity" {...register("quantity", { required: true, min: 0 })} />
-                                                            {errors.quantity?.type === "required" && (
-                                                                <span className="text-error">Quantity is required</span>
-                                                            )}
-                                                        </div>
-
-                                                        <div class="form-control mt-6">
-                                                            <button onSubmit={onSubmit} class="btn btn-primary">Update</button>
-                                                        </div>
-                                                    </form>
-                                                </label>
-                                            </label>
-                                            <button
-                                                onClick={() => handleDeleteItem(dress._id)}
-                                                className="btn btn-error">Delete</button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
+                            products?.map(dress => (
+                                <UpdateProducts key={dress._id} dress={dress} refetch={refetch} setModalProduct={setModalProduct} />
+                            ))
                         }
                     </tbody>
                 </table>
+
             </div>
+            {
+                modalProduct && (<>
+                    <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+                    <div className="modal">
+                        <div className="modal-box relative">
+                            <label
+                                htmlFor="my-modal-3"
+                                className="btn btn-sm btn-circle absolute right-2 top-2"
+                            >
+                                ✕
+                            </label>
+                            <h3 className="text-lg font-bold">{modalProduct?.dressTitle}</h3>
+                            <p>Update Your Product Details From Here</p>
+                            <form onSubmit={handleUpdateStock} action="" className="my-2">
+                                <div className="my-4">
+                                    <label htmlFor="stock">Update Product Name</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Put Your Product Name"
+                                        className="input input-bordered w-full my-3"
+                                        id="stock"
+                                        value={productNameField || modalProduct?.dressTitle}
+                                        onChange={(event) =>
+                                            setProductNameField(event.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="my-4">
+                                    <label htmlFor="stock">Update Available Quantity</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Put Your Quantity"
+                                        className="input input-bordered w-full my-3"
+                                        id="stock"
+                                        value={availableQtyField || modalProduct?.quantity}
+                                        onChange={(event) =>
+                                            setAvailableQtyField(event.target.value)
+                                        }
+                                    />
+                                </div>
+
+                                <div className="my-4">
+                                    <label htmlFor="stock">Update Price</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Put Your Price"
+                                        className="input input-bordered w-full my-3"
+                                        id="stock"
+                                        value={priceField || modalProduct?.price}
+                                        onChange={(event) => setPriceField(event.target.value)}
+                                    />
+                                </div>
+                                <div className="text-right">
+                                    <button className="btn text-white">Update Product</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </>)
+            }
         </div>
     )
 }

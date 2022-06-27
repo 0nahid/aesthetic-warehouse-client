@@ -13,6 +13,7 @@ import Upload from './Components/Dashboard/Upload/Upload';
 import Home from './Components/Home/Home';
 import About from "./Components/Pages/About";
 import Blog from "./Components/Pages/Blog";
+import NoMatch from "./Components/Pages/NoMatch";
 import AllProducts from "./Components/Products/AllProducts";
 import ProductsDetails from "./Components/Products/ProductsDetails";
 import Footer from './Components/Shared/Footer/Footer';
@@ -58,8 +59,8 @@ export default function App() {
                             <Route path="/manage" element={<RequireAuth><Manage /></RequireAuth>} />
                             <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
                             <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+                            <Route path="*" element={<NoMatch />} />
                         </Routes>
-                        <Footer />
                         <Toaster />
                     </div>
 
