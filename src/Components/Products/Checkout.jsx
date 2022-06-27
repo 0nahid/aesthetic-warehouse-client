@@ -28,8 +28,9 @@ export default function Checkout() {
             toast.error("Stock can't be negative!");
             return;
         }
-        await axios.post(`http://localhost:5500/api/orders`, {
+        await axios.post(`http://localhost:5500/api/product/order`, {
             userId: user.uid,
+            email: user.email,
             productId: id,
             quantity: orderQuantity,
             address: address,
@@ -39,13 +40,14 @@ export default function Checkout() {
             createdAt: new Date().toISOString()
         })
             .then(res => {
-              if(res.status){
-                toast.success(`${product.dressTitle} product ordered successfully`);
-              }
-              else{
-                toast.error(`${product.dressTitle} product order failed`);
-              }
-              
+                console.log(res.data);
+                if (res.status === 200) {
+                    toast.success(`${product.dressTitle} product ordered successfully`);
+                }
+                else {
+                    toast.error(`${product.dressTitle} product order failed`);
+                }
+
             })
 
 

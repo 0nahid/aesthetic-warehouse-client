@@ -35,7 +35,7 @@ export default function Manage() {
             {
                 method: "PATCH",
                 headers: {
-                    authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    // authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                     "content-type": "application/json",
                 },
                 body: JSON.stringify({

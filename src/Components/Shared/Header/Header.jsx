@@ -47,11 +47,11 @@ export default function Header() {
         <div>
 
             <div className="navbar bg-base-100"
-                    style={
-                        pathname.includes("dashboard")
-                          ? { display: "none" }
-                          : { display: "flex" }
-                      }>
+                style={
+                    pathname.includes("dashboard")
+                        ? { display: "none" }
+                        : { display: "flex" }
+                }>
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -59,6 +59,15 @@ export default function Header() {
                         </label>
                         <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ">
                             {NavbarMenus}
+                            {
+                                user && (
+                                    <li>
+                                        <NavLink className="uppercase" to="/order">
+                                            My Order
+                                        </NavLink>
+                                    </li>
+                                )
+                            }
                         </ul>
                     </div>
                     <Link to="/">
@@ -67,6 +76,16 @@ export default function Header() {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
                         {NavbarMenus}
+                        {
+                            user && (
+                                <li>
+                                    <NavLink className="uppercase" to="/order">
+                                        My Order
+                                    </NavLink>
+                                </li>
+                            )
+                        }
+
                     </ul>
                 </div>
                 <div className="navbar-end">

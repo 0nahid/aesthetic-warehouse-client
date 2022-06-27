@@ -17,6 +17,7 @@ import Blog from "./Components/Pages/Blog";
 import NoMatch from "./Components/Pages/NoMatch";
 import AllProducts from "./Components/Products/AllProducts";
 import Checkout from "./Components/Products/Checkout";
+import MyOrder from "./Components/Products/MyOrder";
 import ProductsDetails from "./Components/Products/ProductsDetails";
 import Header from './Components/Shared/Header/Header';
 import './index.css';
@@ -58,7 +59,7 @@ export default function App() {
                             <Route path="/shop" element={<RequireAuth><AllProducts /></RequireAuth>} />
                             <Route path="/products/:id" element={<RequireAuth><ProductsDetails /></RequireAuth>} />
                             <Route path="/checkout/:id" element={<RequireAuth><Checkout /></RequireAuth>} />
-                            {/* <Route path="/manage" element={<RequireAuth><Manage /></RequireAuth>} /> */}
+                            <Route path="/order" element={<RequireAuth><MyOrder /></RequireAuth>} />
                             <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
                             <Route
           path="/dashboard"

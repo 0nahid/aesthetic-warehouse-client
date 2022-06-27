@@ -1,7 +1,6 @@
+import { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { Link } from 'react-router-dom';
-import useProducts from '../Hooks/useProducts';
-
 export default function HomeProducts() {
     const breakpointColumnsObj = {
         default: 4,
@@ -12,11 +11,27 @@ export default function HomeProducts() {
         500: 1,
     };
 
-    const [products] = useProducts()
+    // const [products] = useProducts()
+    // console.log(products);
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5500/api/products', {
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`, 
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+                console.log(data);
+            }
+            )
+    }, [])
     return (
         <div>
             <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointColumnsObj}>
-                {products.slice(0, 10).map(product => (
+                {products?.slice(0, 10)?.map(product => (
                     <Link key={product._id} to={`/products/${product._id}`} >
                         <div key={product._id} className="m-5 drop-shadow-2xl bg-gray-50 rounded-xl p-3">
                             <img className="rounded-xl" src={product.image} alt={product.dressTitle} />

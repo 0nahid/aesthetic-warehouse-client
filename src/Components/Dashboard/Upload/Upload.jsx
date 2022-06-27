@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 export default function Upload() {
-    const { register, handleSubmit, formState: { errors } ,reset} = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
         axios.post(`http://localhost:5500/api/products`, data)
             .then(res => {
