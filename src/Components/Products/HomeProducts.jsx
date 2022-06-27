@@ -26,6 +26,11 @@ export default function HomeProducts() {
                     </Link>
                 ))}
             </Masonry>
+            <div className="text-center">
+                <button class="btn btn-info">
+                    <Link to="/shop">Show All</Link>
+                </button>
+            </div>
         </div>
     )
 }
